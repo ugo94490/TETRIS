@@ -6,6 +6,16 @@
 ##
 
 SRC		=	main.c	\
+			src/lib/word_tab.c	\
+			src/lib/clean_str.c	\
+			src/lib/tools.c	\
+			src/lib/tools_two.c	\
+			src/lib/tools_three.c	\
+			src/help.c	\
+			src/tetri/check.c	\
+			src/tetri/get.c	\
+			src/tetri/sort.c	\
+			src/misc.c	\
 
 SRC_T		=
 
