@@ -24,7 +24,7 @@ int help(char *str)
     " (def: left arrow)\n -r --key-right={K}   Move the tetrimino RIGHT "
     "using the K key (def: right arrow)\n");
     my_putstr(" -t --key-turn={K}    TURN the tetrimino clockwise 90d using"
-    " the K key (def: toparrow)\n");
+    " the K key (def: top arrow)\n");
     my_putstr(" -d --key-drop={K}    DROP the tetrimino using the K key (def:"
     " down arrow)\n");
     my_putstr(" -q --key-quit={K}    QUIT the game using the K key (def: ‘q’"
