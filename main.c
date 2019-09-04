@@ -71,10 +71,21 @@ int free_struct(arg_t *arg)
     return (0);
 }
 
-int print_two(char *s1, char *s2)
+int disp_arrow(char *pri, char *str)
 {
-    my_putstr(s1);
-    my_putstr(s2);
+    int count = 0;
+
+    my_putstr(pri);
+    if (my_strcmp(str, "left arrow") == 0)
+        my_putstr("^EOD") == 0 ? count++ : 0;
+    if (my_strcmp(str, "right arrow") == 0)
+        my_putstr("^EOC") == 0 ? count++ : 0;
+    if (my_strcmp(str, "down arrow") == 0)
+        my_putstr("^EOB") == 0 ? count++ : 0;
+    if (my_strcmp(str, "top arrow") == 0)
+        my_putstr("^EOA") == 0 ? count++ : 0;
+    if (count == 0)
+        my_putstr(str);
     my_putstr("\n");
     return (0);
 }
@@ -82,13 +93,13 @@ int print_two(char *s1, char *s2)
 int display_arg(arg_t *arg)
 {
     my_putstr("*** DEBUG MODE ***\n");
-    print_two("Key Left :  ", arg->key_left);
-    print_two("Key Right :  ", arg->key_right);
-    print_two("Key Turn :  ", arg->key_turn);
-    print_two("Key Drop :  ", arg->key_drop);
-    print_two("Key Quit :  ", arg->key_quit);
-    print_two("Key Pause :  ", arg->key_pause);
-    print_two("Next :  ", arg->hide);
+    disp_arrow("Key Left :  ", arg->key_left);
+    disp_arrow("Key Right :  ", arg->key_right);
+    disp_arrow("Key Turn :  ", arg->key_turn);
+    disp_arrow("Key Drop :  ", arg->key_drop);
+    disp_arrow("Key Quit :  ", arg->key_quit);
+    disp_arrow("Key Pause :  ", arg->key_pause);
+    disp_arrow("Next :  ", arg->hide);
     printf("Level :  %d\n", arg->level);
     printf("Size :  %d*%d\n", arg->map_y, arg->map_x);
     return (0);
@@ -367,24 +378,56 @@ int check_over_arg(int ac, char **av)
     return (0);
 }
 
+char **init_tab(arg_t *arg)
+{
+    char **tab = NULL;
+
+    tab = tab_realloc(tab, my_strdup(arg->key_left));
+    tab = tab_realloc(tab, my_strdup(arg->key_right));
+    tab = tab_realloc(tab, my_strdup(arg->key_turn));
+    tab = tab_realloc(tab, my_strdup(arg->key_drop));
+    tab = tab_realloc(tab, my_strdup(arg->key_quit));
+    tab = tab_realloc(tab, my_strdup(arg->key_pause));
+    return (tab);
+}
+
+int check_double_key(arg_t *arg)
+{
+    char **tab = init_tab(arg);
+    int count = 0;
+
+    for (int i = 0; tab[i]; i++) {
+        count = 0;
+        for (int j = 0; tab[j]; j++)
+            my_strcmp(tab[i], tab[j]) == 0 ? count++ : 0;
+        if (count != 1) {
+            my_free_tab(tab);
+            return (84);
+        }
+    }
+    my_free_tab(tab);
+    return (0);
+}
+
 int main(int ac, char **av)
 {
     char **tetrimino_name = NULL;
     arg_t *arg;
+    char c;
 
     if (ac == 2 && my_strcmp(av[1], "--help") == 0)
         return (help(av[0]));
     arg = init_arg();
-    if (check_over_arg(ac, av) == 84 || catch_arg(ac, av, arg) == 84) {
-        free_struct(arg);
-        return (84);
-    }
+    if (check_over_arg(ac, av) == 84 || catch_arg(ac, av, arg) == 84 ||
+        check_double_key(arg) == 84)
+        return (free_struct(arg) == 0 ? 84 : 84);
     if (my_strcmp(arg->debug, "false") == 0)
         return (0);
     display_arg(arg);
     tetrimino_name = get_tetri(tetrimino_name);
     print_all_tetri(tetrimino_name);
-    printf("Press any key to start Tetris\n");
+    my_putstr("Press any key to start Tetris\n");
+    read(0, &c, 1);
     free_struct(arg);
     my_free_tab(tetrimino_name);
     return (0);

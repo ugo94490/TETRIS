@@ -7,14 +7,14 @@
 
 #include "tetris.h"
 
-int my_getnbr(char *str)
+int my_getnbr(char *st)
 {
     int i = 0;
     int count = 0;
     long nbr = 0;
 
-    for (; str[i] < '0' || str[i] > '9'; str[i] == '-' ? count++ : 0, i++);
-    for (;str[i] >= '0' && str[i] <= '9'; nbr = (nbr * 10) + str[i] - '0', i++);
+    for (; st[i] < '0' || st[i] > '9'; st[i] == '-' ? count++ : 0, i++);
+    for (; st[i] >= '0' && st[i] <= '9'; nbr = (nbr * 10) + st[i] - '0', i++);
     count % 2 != 0 ? nbr *= -1 : 0;
     return ((nbr <= 2147483647 && nbr >= -2147483648) ? nbr : 0);
 }
@@ -43,7 +43,7 @@ int reset_struct(info_t *info)
 int display(info_t *info)
 {
     if (info->ret == 84) {
-        printf("Error\n");
+        my_putstr("Error\n");
         return (0);
     }
     printf("Size %d*%d :", info->width, info->height);

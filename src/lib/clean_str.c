@@ -30,7 +30,7 @@ char *clean_str(char const *src, char const *del)
         for (; *srccpy && end_word(*srccpy, del); ++srccpy);
         (flag && size && *srccpy && (srccpy != src) &&
         end_word(*(srccpy - 1), del)) ? *(destcpy++) = *(srccpy - 1) : 0;
-        for (;*srccpy && !end_word(*srccpy, del); ++srccpy)
+        for (; *srccpy && !end_word(*srccpy, del); ++srccpy)
             *(destcpy++) = *srccpy;
     }
     return dest;
@@ -45,7 +45,7 @@ static size_t get_clean_size(char const *str, char const *del)
         for (; *strcpy && end_word(*strcpy, del); ++strcpy);
         i += (i && *strcpy && (strcpy != str) &&
         end_word(*(strcpy - 1), del)) ? 1 : 0;
-        for (;*strcpy && !end_word(*strcpy, del); ++strcpy)
+        for (; *strcpy && !end_word(*strcpy, del); ++strcpy)
             i += 1;
     }
     return i;

@@ -49,7 +49,7 @@ int my_strcmp(char const *s1, char const *s2);
 char *my_strcpy(char *dest, char *src);
 
 /* TOOLS_TWO.C */
-void my_putstr(char *str);
+int my_putstr(char *str);
 char *my_strdup(char *src);
 int my_strncmp(char *s1, char *s2, int n);
 char *concat_directory_path(char *files, char *name);
