@@ -7,7 +7,7 @@
 
 #include "tetris.h"
 
-static struct option long_opt[11] = {
+static struct option LONG_OPT[11] = {
     {"level", required_argument, NULL, 'L'},
     {"key-left", required_argument, NULL, 'l'},
     {"key-right", required_argument, NULL, 'r'},
@@ -352,13 +352,13 @@ int fill_arg(int flag, arg_t *arg)
 
 int catch_arg(int ac, char **av, arg_t *arg)
 {
-    int nb = getopt_long(ac, av, "L:l:r:t:d:q:p:wD", long_opt, NULL);
+    int nb = getopt_long(ac, av, "L:l:r:t:d:q:p:wD", LONG_OPT, NULL);
 
     opterr = 0;
     while (nb != -1) {
         if (nb == '?' || fill_arg(nb, arg) == 84)
             return (84);
-        nb = getopt_long(ac, av, "L:l:r:t:d:q:p:wD", long_opt, NULL);
+        nb = getopt_long(ac, av, "L:l:r:t:d:q:p:wD", LONG_OPT, NULL);
     }
     return (0);
 }
