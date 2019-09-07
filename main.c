@@ -21,6 +21,30 @@ static struct option LONG_OPT[11] = {
     {0, 0, 0, 0}
 };
 
+int my_putchar(char c)
+{
+    write(1, &c, 1);
+    return (0);
+}
+
+int my_putnbr(int nb)
+{
+    int n = 0;
+
+    if (nb < 0) {
+        my_putchar('-');
+        nb = -nb;
+    }
+    if (nb < 10) {
+        my_putchar(nb + '0');
+    } else if (nb > 9) {
+        my_putnbr(nb / 10);
+        n = nb % 10;
+        my_putchar(n + '0');
+    }
+    return (0);
+}
+
 int tetri(char **tab)
 {
     int ret = 0;
@@ -28,7 +52,9 @@ int tetri(char **tab)
 
     for (int i = 0; tab[i]; i++) {
         set_struct(info);
-        printf("Tetriminos :  Name %s :  ", tab[i] + 11);
+        my_putstr("Tetriminos :  Name ");
+        my_putstr(tab[i] + 11);
+        my_putstr(" :  ");
         get_file(info, tab[i]);
         display(info);
         if (info->ret == 84)
@@ -90,6 +116,19 @@ int disp_arrow(char *pri, char *str)
     return (0);
 }
 
+int disp_level_size(int level, int x, int y)
+{
+    my_putstr("Level :  ");
+    my_putnbr(level);
+    my_putstr("\n");
+    my_putstr("Size :  ");
+    my_putnbr(y);
+    my_putstr("*");
+    my_putnbr(x);
+    my_putstr("\n");
+    return (0);
+}
+
 int display_arg(arg_t *arg)
 {
     my_putstr("*** DEBUG MODE ***\n");
@@ -100,8 +139,7 @@ int display_arg(arg_t *arg)
     disp_arrow("Key Quit :  ", arg->key_quit);
     disp_arrow("Key Pause :  ", arg->key_pause);
     disp_arrow("Next :  ", arg->hide);
-    printf("Level :  %d\n", arg->level);
-    printf("Size :  %d*%d\n", arg->map_y, arg->map_x);
+    disp_level_size(arg->level, arg->map_y, arg->map_x);
     return (0);
 }
 
