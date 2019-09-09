@@ -465,7 +465,6 @@ int main(int ac, char **av)
     tetrimino_name = get_tetri(tetrimino_name);
     print_all_tetri(tetrimino_name);
     my_putstr("Press any key to start Tetris\n");
-    read(0, &c, 1);
     free_struct(arg);
     my_free_tab(tetrimino_name);
     return (0);
