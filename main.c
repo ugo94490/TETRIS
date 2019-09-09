@@ -451,7 +451,6 @@ int main(int ac, char **av)
 {
     char **tetrimino_name = NULL;
     arg_t *arg;
-    char c;
 
     if (ac == 2 && my_strcmp(av[1], "--help") == 0)
         return (help(av[0]));

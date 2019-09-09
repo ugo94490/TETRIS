@@ -11,7 +11,9 @@ int nb_tetri(char **tab)
 {
     int nb = my_strlen_tab(tab);
 
-    printf("Tetriminos :  %d\n", nb);
+    my_putstr("Tetriminos ;  ");
+    my_putnbr(nb);
+    my_putstr("\n");
     if (nb == 0)
         return (84);
     return (0);

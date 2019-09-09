@@ -46,8 +46,14 @@ int display(info_t *info)
         my_putstr("Error\n");
         return (0);
     }
-    printf("Size %d*%d :", info->width, info->height);
-    printf("  Color %d :\n", info->color);
+    my_putstr("Size ");
+    my_putnbr(info->width);
+    my_putstr("*");
+    my_putnbr(info->height);
+    my_putstr(" :");
+    my_putstr("  Color ");
+    my_putnbr(info->color);
+    my_putstr(" :\n");
     print_array(info->tetri);
     return (0);
 }

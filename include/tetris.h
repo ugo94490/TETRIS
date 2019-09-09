@@ -96,3 +96,4 @@ int print_all_tetri(char **tab);
 
 /* MAIN.C */
 int tetri(char **tab);
+int my_putnbr(int nb);
