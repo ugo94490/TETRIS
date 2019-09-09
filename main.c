@@ -78,7 +78,7 @@ arg_t *init_arg(void)
     arg->key_pause = my_strdup("(space)");
     arg->map_x = 10;
     arg->map_y = 20;
-    arg->hide = my_strdup("false");
+    arg->hide = my_strdup("Yes");
     arg->debug = my_strdup("false");
     return (arg);
 }
@@ -148,7 +148,7 @@ int set_hide_o_debug(int nb, arg_t *arg)
     if (nb == 'w') {
         if (arg->hide != NULL)
             free(arg->hide);
-        arg->hide = my_strdup("true");
+        arg->hide = my_strdup("No");
     }
     if (nb == 'D') {
         if (arg->debug != NULL)
