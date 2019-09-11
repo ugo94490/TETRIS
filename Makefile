@@ -16,6 +16,7 @@ SRC		=	main.c	\
 			src/tetri/get.c	\
 			src/tetri/sort.c	\
 			src/misc.c	\
+			src/game.c	\
 
 SRC_T		=
 
@@ -29,7 +30,7 @@ TESTS_NAME	=	tests_run
 
 CC		=	gcc
 
-CFLAGS		=	-W -Wall -Wshadow -g3
+CFLAGS		=	-Wextra -Wall -g3
 
 CPPFLAGS	=	-I./include
 
@@ -38,7 +39,7 @@ TEST_FLAGS	=	-lcriterion --coverage
 RM		=	rm -f
 
 $(NAME) 	: 	$(OBJ)
-			@$(CC) -o $(NAME) $(OBJ)
+			@$(CC) -o $(NAME) $(OBJ) -lncurses
 
 all		:	$(NAME)
 

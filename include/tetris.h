@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ncurses.h>
 #include <sys/sysmacros.h>
 
 typedef struct arg_s
@@ -97,3 +98,4 @@ int print_all_tetri(char **tab);
 /* MAIN.C */
 int tetri(char **tab);
 int my_putnbr(int nb);
+int launch(arg_t *arg);

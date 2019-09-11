@@ -457,12 +457,13 @@ int main(int ac, char **av)
     if (check_over_arg(ac, av) == 84 || catch_arg(ac, av, arg) == 84 ||
         check_double_key(arg) == 84)
         return (free_struct(arg) == 0 ? 84 : 84);
-    if (my_strcmp(arg->debug, "false") == 0)
-        return (0);
-    display_arg(arg);
-    tetrimino_name = get_tetri(tetrimino_name);
-    print_all_tetri(tetrimino_name);
+    if (my_strcmp(arg->debug, "false") != 0) {
+        display_arg(arg);
+        tetrimino_name = get_tetri(tetrimino_name);
+        print_all_tetri(tetrimino_name);
+    }
     my_putstr("Press any key to start Tetris\n");
+    launch(arg);
     free_struct(arg);
     my_free_tab(tetrimino_name);
     return (0);
