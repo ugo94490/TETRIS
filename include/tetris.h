@@ -41,14 +41,13 @@ typedef struct info_s
     int ret;
     int x;
     int y;
-    struct info_s *next;
 }info_t;
 
 typedef struct link_s
 {
     info_t *info;
     struct link_s *next;
-}next_t;
+} link_t;
 
 char *clean_str(char const *src, char const *del);
 char **word_tab(char const *src, char const *del);
@@ -107,6 +106,7 @@ int display(info_t *info);
 int print_all_tetri(char **tab);
 
 /* MAIN.C */
+void init_game(arg_t *arg);
 int tetri(char **tab);
 int my_putnbr(int nb);
 int launch(arg_t *arg);
