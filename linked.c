@@ -5,9 +5,11 @@
 ** linked.c
 */
 
-void add_node(char *str, next_t **link)
+#include "tetris.h"
+
+void add_node(char *str, link_t **link)
 {
-    next_t *node = malloc(sizeof(*node));
+    link_t *node = malloc(sizeof(*node));
 
     if (*link == NULL) {
         *link = node;
@@ -23,12 +25,12 @@ void add_node(char *str, next_t **link)
     }
 }
 
-next_t *create_linked(next_t *link)
+link_t *create_linked(link_t *link)
 {
     char **tab = NULL;
 
     tab = get_tetri(tab);
-    if (nb_tetri(tab) == 84)
+    if (my_strlen_tab(tab) <= 0)
         return (NULL);
     tab = tetri_sort(tab);
     for (int i = 0; tab[i]; i++) {
