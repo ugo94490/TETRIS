@@ -234,7 +234,8 @@ int main(int ac, char **av)
         print_all_tetri(tetrimino_name);
     }
     my_putstr("Press any key to start Tetris\n");
-    launch(arg);
+    /* launch(arg); */
+    init_game(arg);
     free_struct(arg);
     my_free_tab(tetrimino_name);
     return (0);
