@@ -83,8 +83,9 @@ int main(int ac, char **av)
         check_double_key(arg) == 84)
         return (free_struct(arg) == 0 ? 84 : 84);
     if (my_strcmp(arg->debug, "false") != 0) {
+        if ((tetrimino_name = get_tetri(tetrimino_name)) == NULL)
+            return (84);
         display_arg(arg);
-        tetrimino_name = get_tetri(tetrimino_name);
         print_all_tetri(tetrimino_name);
     }
     my_putstr("Press any key to start Tetris\n");
