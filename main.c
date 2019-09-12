@@ -7,7 +7,7 @@
 
 #include "tetris.h"
 
-static struct option LONG_OPT[11] = {
+static const struct option LONG_OPT[11] = {
     {"level", required_argument, NULL, 'L'},
     {"key-left", required_argument, NULL, 'l'},
     {"key-right", required_argument, NULL, 'r'},
@@ -446,6 +446,26 @@ int check_double_key(arg_t *arg)
     return (0);
 }
 
+int wait_event(int flag)
+{
+    static struct termios save = {0};
+    static struct termios modif = {0};
+    char nb[1];
+
+    if (flag) {
+        ioctl(0, TCGETS, save);
+        ioctl(0, TCGETS, modif);
+        modif.c_lflag &= ~(ICANON);
+        modif.c_lflag &= ~(ECHO);
+        modif.c_cc[VMIN] = 1;
+        modif.c_cc[VTIME] = 0;
+        ioctl(0, TCSETS, modif);
+        read(0, nb, 1);
+        /* free(nb); */
+    } else
+        ioctl(0, TCSETS, save);
+}
+
 int main(int ac, char **av)
 {
     char **tetrimino_name = NULL;
@@ -463,7 +483,9 @@ int main(int ac, char **av)
         print_all_tetri(tetrimino_name);
     }
     my_putstr("Press any key to start Tetris\n");
-    launch(arg);
+    wait_event(1);
+    wait_event(0);
+    /* launch(arg); */
     free_struct(arg);
     my_free_tab(tetrimino_name);
     return (0);

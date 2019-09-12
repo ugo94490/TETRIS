@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <sys/sysmacros.h>
+#include <termios.h>
+#include <sys/ioctl.h>
 
 typedef struct arg_s
 {
@@ -37,6 +39,9 @@ typedef struct info_s
     int color;
     char **tetri;
     int ret;
+    int x;
+    int y;
+    struct info_s *next;
 }info_t;
 
 char *clean_str(char const *src, char const *del);
