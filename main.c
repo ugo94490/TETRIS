@@ -60,16 +60,14 @@ int wait_event(int flag)
     char nb[1];
 
     if (flag) {
-        ioctl(0, TCGETS, save);
-        ioctl(0, TCGETS, modif);
+        ioctl(0, TCGETS, &save);
+        ioctl(0, TCGETS, &modif);
         modif.c_lflag &= ~(ICANON);
         modif.c_lflag &= ~(ECHO);
-        modif.c_cc[VMIN] = 1;
-        modif.c_cc[VTIME] = 0;
-        ioctl(0, TCSETS, modif);
+        ioctl(0, TCSETS, &modif);
         read(0, nb, 1);
     } else
-        ioctl(0, TCSETS, save);
+        ioctl(0, TCSETS, &save);
     return (0);
 }
 
@@ -90,7 +88,8 @@ int main(int ac, char **av)
         print_all_tetri(tetrimino_name);
     }
     my_putstr("Press any key to start Tetris\n");
-    /* launch(arg); */
+    wait_event(1);
+    wait_event(0);
     init_game(arg);
     free_struct(arg);
     my_free_tab(tetrimino_name);
