@@ -44,6 +44,12 @@ typedef struct info_s
     struct info_s *next;
 }info_t;
 
+typedef struct link_s
+{
+    info_t *info;
+    struct link_s *next;
+}next_t;
+
 char *clean_str(char const *src, char const *del);
 char **word_tab(char const *src, char const *del);
 

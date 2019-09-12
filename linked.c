@@ -5,23 +5,25 @@
 ** linked.c
 */
 
-void add_node(char *str, info_t **info)
+void add_node(char *str, next_t **link)
 {
-    info_t *new = malloc(sizeof(*new));
+    next_t *node = malloc(sizeof(*node));
 
-    if (*info == NULL) {
-        get_file(new, str);
-        *info = new;
+    if (*link == NULL) {
+        *link = node;
+        node->info = malloc(sizeof(info_t));
+        get_file(node->info, str);
     } else {
-        while ((*info)->next != NULL)
-            (*info) = (*info)->next;
-        get_file(new, str);
-        new->next = NULL;
-        (*info)->next = new;
+        while ((*link)->next != NULL)
+            (*link) = (*link)->next;
+        node->info = malloc(sizeof(info_t));
+        get_file(node->info, str);
+        node->next = NULL;
+        (*link)->next = node;
     }
 }
 
-info_t *create_linked(info_t *info)
+next_t *create_linked(next_t *link)
 {
     char **tab = NULL;
 
@@ -30,7 +32,7 @@ info_t *create_linked(info_t *info)
         return (NULL);
     tab = tetri_sort(tab);
     for (int i = 0; tab[i]; i++) {
-        add_node(tab[i], &info);
+        add_node(tab[i], &link);
     }
-    return (info);
+    return (link);
 }
