@@ -25,6 +25,8 @@ SRC		=	main.c	\
 		game/utils.c		\
 		game/rotate_arr.c	\
 		src/assign.c		\
+		src/assign_two.c	\
+		src/assign_three.c	\
 
 SRC_T		=
 
