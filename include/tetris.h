@@ -17,6 +17,20 @@
 #include <termios.h>
 #include <sys/ioctl.h>
 
+static const struct option LONG_OPT[11] = {
+    {"level", required_argument, NULL, 'L'},
+    {"key-left", required_argument, NULL, 'l'},
+    {"key-right", required_argument, NULL, 'r'},
+    {"key-turn", required_argument, NULL, 't'},
+    {"key-drop", required_argument, NULL, 'd'},
+    {"key-quit", required_argument, NULL, 'q'},
+    {"key-pause", required_argument, NULL, 'p'},
+    {"map-size", required_argument, NULL, 'm'},
+    {"without-next", no_argument, NULL, 'w'},
+    {"debug", no_argument, NULL, 'D'},
+    {0, 0, 0, 0}
+};
+
 typedef struct arg_s
 {
     int level;
@@ -41,14 +55,13 @@ typedef struct info_s
     int ret;
     int x;
     int y;
-    struct info_s *next;
 }info_t;
 
 typedef struct link_s
 {
     info_t *info;
     struct link_s *next;
-}next_t;
+}link_t;
 
 char *clean_str(char const *src, char const *del);
 char **word_tab(char const *src, char const *del);
@@ -110,3 +123,20 @@ int print_all_tetri(char **tab);
 int tetri(char **tab);
 int my_putnbr(int nb);
 int launch(arg_t *arg);
+
+void add_node(char *str, link_t **link);
+link_t *create_linked(link_t *link);
+arg_t *init_arg(void);
+int free_struct(arg_t *arg);
+int disp_arrow(char *pri, char *str);
+int disp_level_size(int level, int x, int y);
+int display_arg(arg_t *arg);
+int set_hide_o_debug(int nb, arg_t *arg);
+int check_number(char *str);
+int check_size(arg_t *arg);
+int set_map_size(arg_t *arg);
+int assign_pause(char *str, arg_t *arg);
+int set_pause(arg_t *arg);
+int assign_quit(char *str, arg_t *arg);
+int set_quit(arg_t *arg);
+int assign_drop(char *str, arg_t *arg);
