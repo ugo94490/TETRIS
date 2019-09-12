@@ -7,26 +7,24 @@
 
 
 SRC		=	main.c	\
-		linked.c	\
 		src/lib/word_tab.c	\
 		src/lib/clean_str.c	\
 		src/lib/tools.c		\
 		src/lib/tools_two.c	\
 		src/lib/tools_three.c	\
 		src/lib/print.c	\
-		src/help.c	\
 		src/help.c		\
 		src/tetri/check.c	\
 		src/tetri/get.c		\
 		src/tetri/sort.c	\
 		src/misc.c	\
-		src/game.c	\
 		src/struct_disp.c	\
 		src/disp.c	\
-		linked.c		\
+		src/linked.c		\
 		game/game.c		\
 		game/utils.c		\
 		game/rotate_arr.c	\
+		src/assign.c		\
 
 SRC_T		=
 
