@@ -15,6 +15,7 @@ void add_node(char *str, link_t **link)
         *link = node;
         node->info = malloc(sizeof(info_t));
         get_file(node->info, str);
+        (*link)->next = NULL;
     } else {
         while ((*link)->next != NULL)
             (*link) = (*link)->next;
