@@ -5,13 +5,8 @@
 ** rotate_arr
 */
 
-#include <stdlib.h>
-
-int my_strlen(char const *str);
-void free_word_array(char **arr);
-char *my_strdup(char const *src);
-char *my_strappend(char *str, char c);
-int get_nb_words(char **words);
+#include "tetris.h"
+#include "game.h"
 
 void sub_rotate_arr(char **newarr, char **arr, int nb_words)
 {
@@ -42,4 +37,17 @@ char **rotate_arr(char **arr)
     free(str);
     free_word_array(arr);
     return (newarr);
+}
+
+void rotate_tetri(game_t *game, info_t *tetrimino)
+{
+    char **rotated = copy_words(tetrimino->tetri, 0);
+
+    rotated = rotate_arr(rotated);
+    if (check_can_go(game, rotated, tetrimino->x, tetrimino->y) == 1) {
+        free_word_array(tetrimino->tetri);
+        tetrimino->tetri = rotated;
+    }
+    else
+        free_word_array(rotated);
 }

@@ -9,30 +9,46 @@
 #include "tetris.h"
 #include "game.h"
 
-void print_map(char **map, arg_t *arg)
+void refresh_tetris(game_t *game)
 {
-    int i = 0;
-
-    move(0, 0);
-    printw("+");
-    for (int j = 0; j < arg->map_x; j++)
-        printw("-");
-    printw("+");
-    for (; map[i]; i++) {
-        move(1+i, 0);
-        printw("|%s|", map[i]);
+    if (game->next_tetrimino == NULL)
+        game->next_tetrimino = get_tetri_from_list(game);
+    if (game->actual_tetrimino == NULL) {
+        game->actual_tetrimino = game->next_tetrimino;
+        game->next_tetrimino = NULL;
+        if (check_can_go(game, game->actual_tetrimino->tetri,
+        game->actual_tetrimino->x, game->actual_tetrimino->y) == 0)
+            game->lost = 1;
     }
-    move(i+1, 0);
-    printw("+");
-    for	(int j = 0; j < arg->map_x; j++)
-        printw("-");
-    printw("+");
+    if (game->next_tetrimino == NULL)
+        game->next_tetrimino = get_tetri_from_list(game);
 }
 
-void game(arg_t *arg, char **map)
+void analyse_event(game_t *game)
 {
-    print_map(map, arg);
-    getch();
+    int c = getch();
+
+    refresh_tetris(game);
+    if (c == 113)
+        game->lost = -1;
+    if (c == 258)
+        move_tetr_down(game, game->actual_tetrimino);
+    refresh_tetris(game);
+    if (c == 260)
+        move_tetr_left(game, game->actual_tetrimino);
+    if (c == 261)
+        move_tetr_right(game, game->actual_tetrimino);
+    if (c == 'r')
+        rotate_tetri(game, game->actual_tetrimino);
+}
+
+void game_loop(game_t *game)
+{
+    refresh_tetris(game);
+    while (game->lost == 0) {
+        print_game(game);
+        analyse_event(game);
+    }
 }
 
 char **create_empty_tetris_arr(arg_t *arg)
@@ -52,20 +68,41 @@ char **create_empty_tetris_arr(arg_t *arg)
     return (arr);
 }
 
+game_t create_game_struct(arg_t *arg)
+{
+    game_t game;
+
+    game.tetriminos = NULL;
+    game.tetriminos = create_linked(game.tetriminos);
+    game.map = create_empty_tetris_arr(arg);
+    game.actual_tetrimino = NULL;
+    game.next_tetrimino = NULL;
+    game.arg = arg;
+    if (my_strcmp(arg->hide, "Yes") == 0)
+        game.hide_next = 0;
+    else
+        game.hide_next = 1;
+    game.level = arg->level;
+    game.lines = 0;
+    game.score = 0;
+    game.high_score = 0;
+    game.lost = 0;
+    return (game);
+}
+
 void init_game(arg_t *arg)
 {
-    char **arr;
-    link_t *tetriminos = NULL;
+    game_t game = create_game_struct(arg);
+    WINDOW *window;
 
-    tetriminos = create_linked(tetriminos);
     srand(time(0));
-    initscr();
+    window = initscr();
+    nodelay(window, true);
     noecho();
     raw();
     keypad(stdscr, TRUE);
-    arr = create_empty_tetris_arr(arg);
-    if (arr != NULL)
-        game(arg, arr);
-    free_word_array(arr);
+    if (game.map != NULL && game.tetriminos != NULL)
+        game_loop(&game);
+    free_word_array(game.map);
     endwin();
 }

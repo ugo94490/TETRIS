@@ -24,6 +24,10 @@ SRC		=	main.c	\
 		game/game.c		\
 		game/utils.c		\
 		game/rotate_arr.c	\
+		game/print_game.c	\
+		game/move_tetriminos.c	\
+		game/tetri_fcts.c	\
+		game/insert_tetri.c	\
 		src/assign.c		\
 		src/assign_two.c	\
 		src/assign_three.c	\
