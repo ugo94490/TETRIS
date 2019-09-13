@@ -45,6 +45,7 @@ void print_tetri(game_t *game, info_t *tetri)
 
 void print_infos(game_t *game)
 {
+    game->timer = clock();
     move(game->arg->map_y+2, 0);
     printw("level: %d", game->level);
     move(game->arg->map_y+3, 0);
@@ -53,6 +54,9 @@ void print_infos(game_t *game)
     printw("score: %d", game->score);
     move(game->arg->map_y+5, 0);
     printw("lines: %d", game->lines);
+    move(game->arg->map_y+6, 0);
+    printw("time: %02d:%02d", (game->timer/CLOCKS_PER_SEC)/60,
+    (game->timer/CLOCKS_PER_SEC)%60);
 }
 
 void print_game(game_t *game)

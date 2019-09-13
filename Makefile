@@ -29,6 +29,8 @@ SRC		=	main.c		\
 		game/tetri_fcts.c	\
 		game/insert_tetri.c	\
 		game/analyse_events.c	\
+		game/init_destroy_game.c\
+		game/clock_fcts.c	\
 		src/assign.c		\
 		src/assign_two.c	\
 		src/assign_three.c	\

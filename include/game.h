@@ -22,6 +22,9 @@ typedef struct game_s
     int high_score;
     int score;
     keymap_t keymap;
+    clock_t time_fall;
+    clock_t last_reinit;
+    clock_t timer;
 } game_t;
 
 char *my_strappend(char *str, char c);
@@ -42,5 +45,10 @@ void insert_tetri_in_map(game_t *game, info_t *tetrimino);
 keymap_t convert(arg_t *arg);
 void analyse_event(game_t *game);
 void refresh_tetris(game_t *game);
+char **create_empty_tetris_arr(arg_t *arg);
+game_t create_game_struct(arg_t *arg);
+clock_t get_actual_time(clock_t last_reinit);
+void reinit_clock(clock_t *to_reinit);
+void destroy_game(game_t *game);
 
 #endif

@@ -44,18 +44,21 @@ int check_lines(char **map, game_t *game)
 
 void refresh_tetris(game_t *game)
 {
+    game->time_fall = 1000000;
+    for (int i = 1; i < game->level; i++)
+        game->time_fall = game->time_fall - game->time_fall/10;
+    while (check_lines(game->map, game) != 0);
     if (game->next_tetrimino == NULL)
         game->next_tetrimino = get_tetri_from_list(game);
     if (game->actual_tetrimino == NULL) {
         game->actual_tetrimino = game->next_tetrimino;
         game->next_tetrimino = NULL;
         if (check_can_go(game, game->actual_tetrimino->tetri,
-	game->actual_tetrimino->x, game->actual_tetrimino->y) == 0)
+        game->actual_tetrimino->x, game->actual_tetrimino->y) == 0)
             game->lost = 1;
     }
     if (game->next_tetrimino == NULL)
         game->next_tetrimino = get_tetri_from_list(game);
-    while (check_lines(game->map, game) != 0);
 }
 
 void analyse_event(game_t *game)
