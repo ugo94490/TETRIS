@@ -167,3 +167,6 @@ int wait_event(int flag);
 int check_double_key(arg_t *arg);
 char **init_tab(arg_t *arg);
 int check_over_arg(int ac, char **av);
+char *my_itoa(int nb, char *nbr);
+int my_int(int nb);
+int load_score(void);

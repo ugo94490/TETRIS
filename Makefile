@@ -36,6 +36,8 @@ SRC		=	main.c		\
 		src/assign_three.c	\
 		src/convert.c		\
 		src/init.c		\
+		src/save.c		\
+		src/tools.c		\
 
 SRC_T		=
 
