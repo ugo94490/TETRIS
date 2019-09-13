@@ -27,6 +27,7 @@ SRC		=	main.c	\
 		src/assign.c		\
 		src/assign_two.c	\
 		src/assign_three.c	\
+		src/convert.c		\
 
 SRC_T		=
 
