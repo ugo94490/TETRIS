@@ -29,23 +29,43 @@ void print_map(char **map, arg_t *arg)
     printw("+");
 }
 
-void sub_print_actual_tetri(game_t *game, int posx, int posy)
+void sub_print_actual_tetri(game_t *game, info_t *tetri, int posx, int posy)
 {
-    move(posy + 1 + game->actual_tetrimino->y,
-    posx + 1 + game->actual_tetrimino->x);
-    if (game->actual_tetrimino->tetri[posy][posx] == '*')
+    move(posy + 1 + tetri->y, posx + 1 + tetri->x);
+    if (tetri->tetri[posy][posx] == '*')
         printw("*");
 }
 
-void print_actual_tetri(game_t *game)
+void print_tetri(game_t *game, info_t *tetri)
 {
-    for (int y = 0; game->actual_tetrimino->tetri[y]; y++)
-        for (int x = 0; game->actual_tetrimino->tetri[y][x]; x++)
-            sub_print_actual_tetri(game, x, y);
+    for (int y = 0; tetri->tetri[y]; y++)
+        for (int x = 0; tetri->tetri[y][x]; x++)
+            sub_print_actual_tetri(game, tetri, x, y);
+}
+
+void print_infos(game_t *game)
+{
+    move(game->arg->map_y+2, 0);
+    printw("level: %d", game->level);
+    move(game->arg->map_y+3, 0);
+    printw("high score: %d", game->high_score);
+    move(game->arg->map_y+4, 0);
+    printw("score: %d", game->score);
+    move(game->arg->map_y+5, 0);
+    printw("lines: %d", game->lines);
 }
 
 void print_game(game_t *game)
 {
+    game->next_tetrimino->y = game->arg->map_y + 7;
+    game->next_tetrimino->x = 0;
     print_map(game->map, game->arg);
-    print_actual_tetri(game);
+    print_tetri(game, game->actual_tetrimino);
+    print_infos(game);
+    if (game->hide_next == 0) {
+        move(game->arg->map_y + 7, 0);
+        printw("next:");
+        print_tetri(game, game->next_tetrimino);
+    }
+    game->next_tetrimino->y = 0;
 }

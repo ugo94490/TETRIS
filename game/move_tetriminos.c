@@ -34,6 +34,13 @@ void move_tetr_down(game_t *game, info_t *tetrimino)
 {
     if (check_can_go(game, tetrimino->tetri, tetrimino->x, tetrimino->y + 1))
         tetrimino->y += 1;
+    else {
+        clear();
+        insert_tetri_in_map(game, tetrimino);
+        free_word_array(tetrimino->tetri);
+        free(tetrimino);
+        game->actual_tetrimino = NULL;
+    }
 }
 
 void move_tetr_left(game_t *game, info_t *tetrimino)

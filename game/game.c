@@ -9,64 +9,6 @@
 #include "tetris.h"
 #include "game.h"
 
-int get_list_len(link_t *list)
-{
-    int i = 0;
-
-    for (; list != NULL; i++)
-        list = list->next;
-    return (i);
-}
-
-char **copy_words(char **words, int arg)
-{
-    int i = 0;
-    int j = 0;
-    char **copy;
-
-    for (; words[i] != NULL; i++);
-    copy = malloc(sizeof(char*) * (i+1+arg));
-    if (copy == NULL)
-        exit(84);
-    copy[i] = NULL;
-    for (i = 0; words[i] != NULL; i++) {
-        copy[i] = malloc(sizeof(char)* (my_strlen(words[i])+1));
-        if (copy[i] == NULL)
-            exit(84);
-    }
-    for (i = 0; words[i] != NULL; i++) {
-        for (j = 0; words[i][j] != '\0'; j++)
-            copy[i][j] = words[i][j];
-        copy[i][j] = '\0';
-    }
-    return (copy);
-}
-
-info_t *copy_tetrimino(info_t *to_copy)
-{
-    info_t *cpy = malloc(sizeof(info_t));
-
-    cpy->width = to_copy->width;
-    cpy->height = to_copy->height;
-    cpy->color = to_copy->color;
-    cpy->ret = to_copy->ret;
-    cpy->x = 0;
-    cpy->y = 0;
-    cpy->tetri = copy_words(to_copy->tetri, 0);
-    return (cpy);
-}
-
-info_t *get_tetri_from_list(game_t *game)
-{
-    link_t *cpy = game->tetriminos;
-    int len = get_list_len(game->tetriminos);
-    int randomnb = rand()%len;
-
-    for (int i = 0; i < randomnb; i++)
-        cpy = cpy->next;
-    return (copy_tetrimino(cpy->info));
-}
-
 void refresh_tetris(game_t *game)
 {
     if (game->next_tetrimino == NULL)
@@ -74,35 +16,38 @@ void refresh_tetris(game_t *game)
     if (game->actual_tetrimino == NULL) {
         game->actual_tetrimino = game->next_tetrimino;
         game->next_tetrimino = NULL;
+        if (check_can_go(game, game->actual_tetrimino->tetri,
+        game->actual_tetrimino->x, game->actual_tetrimino->y) == 0)
+            game->lost = 1;
     }
     if (game->next_tetrimino == NULL)
         game->next_tetrimino = get_tetri_from_list(game);
 }
 
-void analyse_event(game_t *game, int *loop)
+void analyse_event(game_t *game)
 {
     int c = getch();
 
     refresh_tetris(game);
     if (c == 113)
-        *loop = 0;
+        game->lost = -1;
     if (c == 258)
         move_tetr_down(game, game->actual_tetrimino);
+    refresh_tetris(game);
     if (c == 260)
         move_tetr_left(game, game->actual_tetrimino);
     if (c == 261)
         move_tetr_right(game, game->actual_tetrimino);
-    refresh_tetris(game);
+    if (c == 'r')
+        rotate_tetri(game, game->actual_tetrimino);
 }
 
 void game_loop(game_t *game)
 {
-    int loop = 1;
-
     refresh_tetris(game);
-    while (loop == 1) {
+    while (game->lost == 0) {
         print_game(game);
-        analyse_event(game, &loop);
+        analyse_event(game);
     }
 }
 
@@ -133,6 +78,15 @@ game_t create_game_struct(arg_t *arg)
     game.actual_tetrimino = NULL;
     game.next_tetrimino = NULL;
     game.arg = arg;
+    if (my_strcmp(arg->hide, "Yes") == 0)
+        game.hide_next = 0;
+    else
+        game.hide_next = 1;
+    game.level = arg->level;
+    game.lines = 0;
+    game.score = 0;
+    game.high_score = 0;
+    game.lost = 0;
     return (game);
 }
 
