@@ -21,6 +21,7 @@ typedef struct game_s
     int level;
     int high_score;
     int score;
+    keymap_t keymap;
 } game_t;
 
 char *my_strappend(char *str, char c);
@@ -38,5 +39,8 @@ char **copy_words(char **words, int arg);
 int check_can_go(game_t *game, char **tetri, int posx, int posy);
 void rotate_tetri(game_t *game, info_t *tetrimino);
 void insert_tetri_in_map(game_t *game, info_t *tetrimino);
+keymap_t convert(arg_t *arg);
+void analyse_event(game_t *game);
+void refresh_tetris(game_t *game);
 
 #endif
