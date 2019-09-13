@@ -9,6 +9,20 @@
 #include "tetris.h"
 #include "game.h"
 
+void pausegame(game_t *game)
+{
+    int c;
+    int pause = 1;
+
+    while (game->lost == 0 && pause == 1) {
+        c = getch();
+        if (c == game->keymap.pause)
+            pause = 0;
+        if (c == game->keymap.quit)
+            game->lost = -1;
+    }
+}
+
 void game_loop(game_t *game)
 {
     clock_t clock;

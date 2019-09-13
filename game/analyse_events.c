@@ -78,4 +78,6 @@ void analyse_event(game_t *game)
         move_tetr_right(game, game->actual_tetrimino);
     if (c == game->keymap.turn)
         rotate_tetri(game, game->actual_tetrimino);
+    if (c == game->keymap.pause)
+        pausegame(game);
 }

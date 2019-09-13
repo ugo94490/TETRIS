@@ -18,7 +18,7 @@ int convert_key(char *str)
     if (my_strcmp(str, "top arrow") == 0)
         return (KEY_UP);
     if (my_strcmp(str, "(space)") == 0)
-        return (KEY_BACKSPACE);
+        return (' ');
     return (str[0]);
 }
 
