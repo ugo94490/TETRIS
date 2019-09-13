@@ -46,7 +46,7 @@ typedef struct arg_s
     char *debug;
 }arg_t;
 
-typedef struct key_s
+typedef struct keymap_s
 {
     int left;
     int right;
@@ -54,7 +54,7 @@ typedef struct key_s
     int drop;
     int quit;
     int pause;
-}key_t;
+}keymap_t;
 
 typedef struct info_s
 {
@@ -161,4 +161,3 @@ int set_left(arg_t *arg);
 int set_level(arg_t *arg);
 int fill_arg(int flag, arg_t *arg);
 int catch_arg(int ac, char **av, arg_t *arg);
-key_t *convert(arg_t *arg, key_t *key);

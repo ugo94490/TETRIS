@@ -28,6 +28,7 @@ SRC		=	main.c	\
 		game/move_tetriminos.c	\
 		game/tetri_fcts.c	\
 		game/insert_tetri.c	\
+		game/analyse_events.c	\
 		src/assign.c		\
 		src/assign_two.c	\
 		src/assign_three.c	\
