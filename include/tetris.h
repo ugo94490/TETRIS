@@ -46,7 +46,7 @@ typedef struct arg_s
     char *debug;
 }arg_t;
 
-typedef struct key_s
+typedef struct keys_s
 {
     int left;
     int right;
@@ -54,7 +54,7 @@ typedef struct key_s
     int drop;
     int quit;
     int pause;
-}key_t;
+}keys_t;
 
 typedef struct info_s
 {
@@ -161,4 +161,9 @@ int set_left(arg_t *arg);
 int set_level(arg_t *arg);
 int fill_arg(int flag, arg_t *arg);
 int catch_arg(int ac, char **av, arg_t *arg);
-key_t *convert(arg_t *arg, key_t *key);
+keys_t *convert(arg_t *arg, keys_t *key);
+int tetris(char **tetrimino_name, arg_t *arg);
+int wait_event(int flag);
+int check_double_key(arg_t *arg);
+char **init_tab(arg_t *arg);
+int check_over_arg(int ac, char **av);

@@ -22,7 +22,7 @@ int convert_key(char *str)
     return (str[0]);
 }
 
-key_t *convert(arg_t *arg, key_t *key)
+keys_t *convert(arg_t *arg, keys_t *key)
 {
     key->left = convert_key(arg->key_left);
     key->right = convert_key(arg->key_right);

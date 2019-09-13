@@ -6,20 +6,20 @@
 ##
 
 
-SRC		=	main.c	\
+SRC		=	main.c		\
 		src/lib/word_tab.c	\
 		src/lib/clean_str.c	\
 		src/lib/tools.c		\
 		src/lib/tools_two.c	\
 		src/lib/tools_three.c	\
-		src/lib/print.c	\
+		src/lib/print.c		\
 		src/help.c		\
 		src/tetri/check.c	\
 		src/tetri/get.c		\
 		src/tetri/sort.c	\
-		src/misc.c	\
+		src/misc.c		\
 		src/struct_disp.c	\
-		src/disp.c	\
+		src/disp.c		\
 		src/linked.c		\
 		game/game.c		\
 		game/utils.c		\
@@ -32,6 +32,7 @@ SRC		=	main.c	\
 		src/assign_two.c	\
 		src/assign_three.c	\
 		src/convert.c		\
+		src/init.c		\
 
 SRC_T		=
 
