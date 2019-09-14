@@ -43,6 +43,7 @@ void init_game(arg_t *arg)
 {
     game_t game = create_game_struct(arg);
     WINDOW *window;
+    int started = 0;
 
     srand(time(0));
     window = initscr();
@@ -51,11 +52,12 @@ void init_game(arg_t *arg)
     raw();
     keypad(stdscr, TRUE);
     if (LINES >= arg->map_y + 10 && COLS >= arg->map_x + 2) {
+        started = 1;
         if (game.map != NULL && game.tetriminos != NULL)
             game_loop(&game);
     }
     destroy_game(&game);
     endwin();
-    if (LINES < arg->map_y + 10 || COLS < arg->map_x + 2)
+    if (started == 0)
         write(2, "Please enlarge your terminal\n", 29);
 }

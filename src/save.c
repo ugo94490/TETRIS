@@ -30,10 +30,10 @@ int load_score(void)
 int concat(game_t *game, char *nbr, FILE *stream)
 {
     char *tmp = NULL;
+
     nbr = malloc(sizeof(char) * (my_int(game->score) + 1));
     tmp = my_itoa(game->score, nbr);
     fwrite(tmp, 1, my_strlen(tmp), stream);
-    free(tmp);
     free(nbr);
     return (0);
 }
