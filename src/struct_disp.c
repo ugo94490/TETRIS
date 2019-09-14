@@ -17,7 +17,8 @@ int tetri(char **tab)
         my_putstr("Tetriminos :  Name ");
         my_putstr(tab[i] + 11);
         my_putstr(" :  ");
-        get_file(info, tab[i]);
+        if (get_file(info, tab[i]) == 84)
+            info->ret = 84;
         display(info);
         if (info->ret == 84)
             ret = 84;

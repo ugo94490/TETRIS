@@ -32,7 +32,7 @@ game_t create_game_struct(arg_t *arg)
     game_t game;
 
     game.tetriminos = NULL;
-    game.tetriminos = create_linked(game.tetriminos);
+    create_linked(&(game.tetriminos));
     game.map = create_empty_tetris_arr(arg);
     game.actual_tetrimino = NULL;
     game.next_tetrimino = NULL;

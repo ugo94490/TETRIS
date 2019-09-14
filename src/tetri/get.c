@@ -84,6 +84,9 @@ int get_file(info_t *info, char *str)
     char *buffer = NULL;
     size_t len = 0;
 
+    info->ret = 0;
+    if (stream == NULL)
+        return (84);
     while ((nb = getline(&buffer, &len, stream)) > 0) {
         buffer[nb - 1] = '\0';
         tab = tab_realloc(tab, buffer);

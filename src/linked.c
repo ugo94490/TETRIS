@@ -9,36 +9,37 @@
 
 void add_node(char *str, link_t **link)
 {
-    link_t *node = malloc(sizeof(link_t));
+    link_t *node;
 
-    if (*link == NULL) {
-        *link = node;
-        node->info = malloc(sizeof(info_t));
-        get_file(node->info, str);
-        (*link)->next = NULL;
-    } else {
-        while ((*link)->next != NULL)
-            (*link) = (*link)->next;
-        node->info = malloc(sizeof(info_t));
-        get_file(node->info, str);
-        node->next = NULL;
-        (*link)->next = node;
+    node = malloc(sizeof(link_t));
+    node->info = malloc(sizeof(info_t));
+    if (get_file(node->info, str) == 84 || node->info->ret == 84) {
+        free(node->info);
+        free(node);
+        printf("décès");
+        return;
     }
+    node->next = *link;
+    *link = node;
 }
 
-link_t *create_linked(link_t *link)
+void create_linked(link_t **link)
 {
     char **tab = NULL;
     char **tab2 = NULL;
+    FILE *stream = NULL;
 
     tab = get_tetri(tab);
     if (my_strlen_tab(tab) <= 0)
-        return (NULL);
+        return;
     tab2 = tetri_sort(tab);
-    for (int i = 0; tab[i]; i++) {
-        add_node(tab2[i], &link);
+    for (int i = 0; tab2[i]; i++) {
+        stream = fopen(tab2[i], "r");
+        if (stream != NULL) {
+            add_node(tab2[i], link);
+            fclose(stream);
+        }
     }
     my_free_tab(tab);
     my_free_tab(tab2);
-    return (link);
 }

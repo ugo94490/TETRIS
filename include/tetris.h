@@ -136,7 +136,6 @@ int my_putnbr(int nb);
 int launch(arg_t *arg);
 
 void add_node(char *str, link_t **link);
-link_t *create_linked(link_t *link);
 arg_t *init_arg(void);
 int free_struct(arg_t *arg);
 int disp_arrow(char *pri, char *str);
