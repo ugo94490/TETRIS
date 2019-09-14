@@ -16,17 +16,18 @@ int assign_left(char *str, arg_t *arg)
 
 int set_left(arg_t *arg)
 {
-    if (my_strcmp(optarg, "left arrow") == 0)
+    if (my_strcmp(optarg, "left arrow") == 0 || my_strcmp(optarg, "leftk") == 0)
         return (assign_left("left arrow", arg));
-    if (my_strcmp(optarg, "right arrow") == 0)
+    if (my_strcmp(optarg, "right arrow") == 0 || my_strcmp(optarg, "rightk")
+        == 0)
         return (assign_left("right arrow", arg));
-    if (my_strcmp(optarg, "down arrow") == 0)
+    if (my_strcmp(optarg, "down arrow") == 0 || my_strcmp(optarg, "downk") == 0)
         return (assign_left("down arrow", arg));
-    if (my_strcmp(optarg, "up arrow") == 0)
+    if (my_strcmp(optarg, "up arrow") == 0 || my_strcmp(optarg, "topk") == 0)
         return (assign_left("up arrow", arg));
     if (my_strcmp(optarg, " ") == 0)
         return (assign_left("(space)", arg));
-    if (my_strlen(optarg) == 1) {
+    else {
         free(arg->key_left);
         arg->key_left = my_strdup(optarg);
         return (0);
