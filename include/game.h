@@ -51,5 +51,6 @@ clock_t get_actual_time(clock_t last_reinit);
 void reinit_clock(clock_t *to_reinit);
 void destroy_game(game_t *game);
 int save(game_t *game);
+void pausegame(game_t *game);
 
 #endif
