@@ -43,3 +43,14 @@ void create_linked(link_t **link)
     my_free_tab(tab);
     my_free_tab(tab2);
 }
+
+int display_name(char *str)
+{
+    int nb = 0;
+
+    str = str + 11;
+    nb = my_strlen(str) - 10;
+    str[nb] = '\0';
+    my_putstr(str);
+    return (0);
+}

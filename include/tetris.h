@@ -169,3 +169,4 @@ int check_over_arg(int ac, char **av);
 char *my_itoa(int nb, char *nbr);
 int my_int(int nb);
 int load_score(void);
+int display_name(char *str);

@@ -15,7 +15,7 @@ int tetri(char **tab)
     for (int i = 0; tab[i]; i++) {
         set_struct(info);
         my_putstr("Tetriminos :  Name ");
-        my_putstr(tab[i] + 11);
+        display_name(my_strdup(tab[i]));
         my_putstr(" :  ");
         if (get_file(info, tab[i]) == 84)
             info->ret = 84;
