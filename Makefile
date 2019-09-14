@@ -51,7 +51,7 @@ TESTS_NAME	=	tests_run
 
 CC		=	gcc
 
-CFLAGS		=	-Wextra -Wall -g3
+CFLAGS		=	-Wextra -Wall
 
 CPPFLAGS	=	-I./include
 
