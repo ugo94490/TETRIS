@@ -25,7 +25,7 @@ char **rotate_arr(char **arr)
     for (int i = 0; arr && arr[i]; i++)
         if (my_strlen(arr[i]) > longest_line_len)
             longest_line_len = my_strlen(arr[i]);
-    newarr = malloc(sizeof(char*) * longest_line_len+1);
+    newarr = malloc(sizeof(char*) * (longest_line_len+1));
     if (newarr == NULL || str == NULL)
         return (NULL);
     str[0] = '\0';
@@ -33,6 +33,7 @@ char **rotate_arr(char **arr)
         str = my_strappend(str, ' ');
     for (int i = 0; i < longest_line_len; i++)
         newarr[i] = my_strdup(str);
+    newarr[longest_line_len] = NULL;
     sub_rotate_arr(newarr, arr, nb_words);
     free(str);
     free_word_array(arr);
