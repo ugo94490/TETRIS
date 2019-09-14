@@ -9,7 +9,7 @@
 
 void add_node(char *str, link_t **link)
 {
-    link_t *node = malloc(sizeof(*node));
+    link_t *node = malloc(sizeof(link_t));
 
     if (*link == NULL) {
         *link = node;
@@ -29,13 +29,16 @@ void add_node(char *str, link_t **link)
 link_t *create_linked(link_t *link)
 {
     char **tab = NULL;
+    char **tab2 = NULL;
 
     tab = get_tetri(tab);
     if (my_strlen_tab(tab) <= 0)
         return (NULL);
-    tab = tetri_sort(tab);
+    tab2 = tetri_sort(tab);
     for (int i = 0; tab[i]; i++) {
-        add_node(tab[i], &link);
+        add_node(tab2[i], &link);
     }
+    my_free_tab(tab);
+    my_free_tab(tab2);
     return (link);
 }

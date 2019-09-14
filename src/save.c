@@ -20,15 +20,21 @@ int load_score(void)
     nb = getline(&buffer, &len, stream);
     if (nb <= 0)
         return (0);
-    else
-        return (my_getnbr(buffer));
+    else {
+        nb = my_getnbr(buffer);
+        free(buffer);
+        return (nb);
+    }
 }
 
 int concat(game_t *game, char *nbr, FILE *stream)
 {
+    char *tmp = NULL;
     nbr = malloc(sizeof(char) * (my_int(game->score) + 1));
-    nbr = my_itoa(game->score, nbr);
-    fwrite(nbr, 1, my_strlen(nbr), stream);
+    tmp = my_itoa(game->score, nbr);
+    fwrite(tmp, 1, my_strlen(tmp), stream);
+    free(tmp);
+    free(nbr);
     return (0);
 }
 
