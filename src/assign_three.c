@@ -72,7 +72,7 @@ int catch_arg(int ac, char **av, arg_t *arg)
 
     while (nb != -1) {
         if (nb == '?' || fill_arg(nb, arg) == 84)
-            return (84);
+            return (0);
         nb = getopt_long(ac, av, "L:l:r:t:d:q:p:wD", LONG_OPT, NULL);
     }
     return (0);
