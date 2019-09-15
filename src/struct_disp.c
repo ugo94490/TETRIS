@@ -85,9 +85,9 @@ int disp_level_size(int level, int x, int y)
     my_putnbr(level);
     my_putstr("\n");
     my_putstr("Size :  ");
-    my_putnbr(y);
-    my_putstr("*");
     my_putnbr(x);
+    my_putstr("*");
+    my_putnbr(y);
     my_putstr("\n");
     return (0);
 }

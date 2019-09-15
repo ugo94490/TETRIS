@@ -66,10 +66,11 @@ int vrf_w(info_t *info, char **shape)
             my_free_tab(tmp);
             return (84);
         }
-        (nb = count(tmp)) > save ? save = nb : 0;
+        (nb = my_strlen(clean_str(shape[i], " "))) > save ? save = nb : 0;
         my_free_tab(tmp);
     }
-    if (save != info->width)
+    if (save != info->width) {
         return (info->ret = 84);
+    }
     return (0);
 }

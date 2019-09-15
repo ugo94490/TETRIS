@@ -16,7 +16,6 @@ void add_node(char *str, link_t **link)
     if (get_file(node->info, str) == 84 || node->info->ret == 84) {
         free(node->info);
         free(node);
-        printf("décès");
         return;
     }
     node->next = *link;
