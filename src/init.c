@@ -17,7 +17,7 @@ int check_over_arg(int ac, char **av)
             return (84);
         if (av[i][0] != '-' && (my_strcmp(av[i - 1], "-w") == 0 ||
             my_strcmp(av[i - 1], "-D") == 0))
-            return (84);
+            return (1);
     }
     return (0);
 }
