@@ -170,3 +170,4 @@ char *my_itoa(int nb, char *nbr);
 int my_int(int nb);
 int load_score(void);
 int display_name(char *str);
+int convert_key(char *str);

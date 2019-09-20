@@ -27,7 +27,7 @@ int help(char *str)
     " the K key (def: top arrow)\n");
     my_putstr(" -d --key-drop={K}    DROP the tetrimino using the K key (def:"
     " down arrow)\n");
-    my_putstr(" -q --key-quit={K}    QUIT the game using the K key (def: ‘q’"
+    my_putstr(" -q --key-quit={K}    QUIT the game using the K key (def: 'q'"
     " key)\n");
     my_putstr(" -p --key-pause={K}   PAUSE/RESTART the game using the K key "
     "(def: space bar)\n");

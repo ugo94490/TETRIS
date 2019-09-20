@@ -38,8 +38,30 @@ SRC		=	main.c		\
 		src/init.c		\
 		src/save.c		\
 		src/tools.c		\
+		src/new.c		\
 
-SRC_T		=
+SRC_T		=	tests/test.c	\
+		src/lib/word_tab.c	\
+		src/lib/clean_str.c	\
+		src/lib/tools.c		\
+		src/lib/tools_two.c	\
+		src/lib/tools_three.c	\
+		src/lib/print.c		\
+		src/help.c		\
+		src/tetri/check.c	\
+		src/tetri/get.c		\
+		src/tetri/sort.c	\
+		src/misc.c		\
+		src/struct_disp.c	\
+		src/disp.c		\
+		src/linked.c		\
+		src/assign.c		\
+		src/assign_two.c	\
+		src/assign_three.c	\
+		src/convert.c		\
+		src/init.c		\
+		src/save.c		\
+		src/tools.c		\
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -47,7 +69,7 @@ OBJ_T		=	$(SRC_T:.c=.o)
 
 NAME		=	tetris
 
-TESTS_NAME	=	tests_run
+TESTS_NAME	=	unit_tests
 
 CC		=	gcc
 
@@ -66,8 +88,11 @@ all		:	$(NAME)
 
 tests_run 	:
 			@$(CC) $(SRC_T) $(CFLAGS) $(CPPFLAGS) $(TEST_FLAGS) -o $(TESTS_NAME)
-			@./$(TESTS_NAME)
-			@mv *.gc* tests/
+			./unit_tests
+			gcovr -r . --exclude tests
+			gcovr -r . -b --exclude tests
+			rm -f unit_tests
+			$(RM) *.gc*
 
 clean 		:
 			$(RM) $(OBJ)

@@ -70,14 +70,3 @@ int wait_event(int flag)
         ioctl(0, TCSETS, &save);
     return (0);
 }
-
-int tetris(char **tetrimino_name, arg_t *arg)
-{
-    my_putstr("Press any key to start Tetris\n");
-    wait_event(1);
-    wait_event(0);
-    init_game(arg);
-    free_struct(arg);
-    my_free_tab(tetrimino_name);
-    return (0);
-}
