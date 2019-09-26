@@ -32,6 +32,7 @@ SRC		=	main.c		\
 		game/analyse_events.c	\
 		game/init_destroy_game.c\
 		game/clock_fcts.c	\
+		game/print_infos.c	\
 		game/misc.c		\
 		src/assign.c		\
 		src/assign_two.c	\

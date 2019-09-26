@@ -51,7 +51,6 @@ game_t create_game_struct(arg_t *arg, window_t *window)
     game.high_score = load_score();
     game.lost = 0;
     game.keymap = convert(arg);
-    game.last_reinit = clock();
     game.window = window;
     return (game);
 }
@@ -76,7 +75,8 @@ void destroy_tetrimino_list(link_t *list)
 
 void destroy_game(game_t *game)
 {
-    save(game);
+    if (game->score > game->high_score)
+        save(game);
     destroy_tetrimino(game->actual_tetrimino);
     destroy_tetrimino(game->next_tetrimino);
     free_word_array(game->map);

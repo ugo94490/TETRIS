@@ -7,6 +7,13 @@
 
 #include "tetris.h"
 
+static char *itoa_zero(char *nbr)
+{
+    nbr[0] = '0';
+    nbr[1] = '\0';
+    return (nbr);
+}
+
 char *my_itoa(int nb, char *nbr)
 {
     bool sign = false;
@@ -14,7 +21,7 @@ char *my_itoa(int nb, char *nbr)
     int i = 0;
 
     if (nb == 0)
-        return ("0");
+        return (itoa_zero(nbr));
     if (nb < 0) {
         sign = true;
         nb = -nb;

@@ -50,14 +50,15 @@ int save(game_t *game)
     size_t len = 0;
     int nb = 0;
 
-    if (stream == NULL)
+    if (game->score < game->high_score ||
+    (stream = fopen(".highscore", "w")) == NULL)
         return (0);
     nb = getline(&buffer, &len, stream);
     if (nb <= 0)
         concat(game, nbr, stream);
     if (nb > 0) {
         nb = my_getnbr(buffer);
-        if (game->score > nb)
+        if (game->score > game->high_score)
             concat(game, nbr, stream);
     }
     if (buffer != NULL)

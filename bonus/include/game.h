@@ -23,10 +23,10 @@ typedef struct game_s
     int score;
     keymap_t keymap;
     clock_t time_fall;
-    clock_t last_reinit;
-    clock_t timer;
+    clock_sf timer;
     window_t *window;
     sprite_t sprite;
+    text_t text;
 } game_t;
 
 static const sfIntRect blockRects[8] =
@@ -68,5 +68,6 @@ int save(game_t *game);
 void pausegame(game_t *game);
 void draw_tetri(game_t *game, int color, sfVector2f pos);
 void print_map(game_t *game, char **map, arg_t *arg);
+void print_infos(game_t *game);
 
 #endif

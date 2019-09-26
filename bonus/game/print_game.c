@@ -31,22 +31,6 @@ void print_tetri(game_t *game, info_t *tetri)
             sub_print_actual_tetri(game, tetri, x, y);
 }
 
-void print_infos(game_t *game)
-{
-    game->timer = clock();
-    move(game->arg->map_y+2, 0);
-    printw("level: %d", game->level);
-    move(game->arg->map_y+3, 0);
-    printw("high score: %d", game->high_score);
-    move(game->arg->map_y+4, 0);
-    printw("score: %d", game->score);
-    move(game->arg->map_y+5, 0);
-    printw("lines: %d", game->lines);
-    move(game->arg->map_y+6, 0);
-    printw("time: %02d:%02d", (game->timer/CLOCKS_PER_SEC)/60,
-    (game->timer/CLOCKS_PER_SEC)%60);
-}
-
 void print_game(game_t *game)
 {
     sfRenderWindow_clear(game->window->window, sfBlack);
@@ -54,6 +38,7 @@ void print_game(game_t *game)
     game->next_tetrimino->x = 0;
     print_map(game, game->map, game->arg);
     print_tetri(game, game->actual_tetrimino);
+    print_infos(game);
     if (game->hide_next == 0) {
         game->next_tetrimino->y = 0;
         game->next_tetrimino->x = game->arg->map_x + 4;

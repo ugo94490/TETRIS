@@ -57,7 +57,11 @@ void init_game(arg_t *arg)
     window_t window = create_window(800, 600, 32, "tetris");
     game_t game = create_game_struct(arg, &window);
     sfMusic *music = sfMusic_createFromFile("assets/theme.ogg");
+    text_t text = create_text("NULL",
+    "assets/yoster.ttf", 20, create_vector2f(0, 0));
 
+    game.timer = create_clock();
+    game.text = text;
     sfMusic_setLoop(music, sfTrue);
     sfMusic_play(music);
     game.sprite = create_sprite("assets/blocks.png");
