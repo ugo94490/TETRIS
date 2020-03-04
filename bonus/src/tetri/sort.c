@@ -58,6 +58,7 @@ int vrf_w(info_t *info, char **shape)
     char **tmp = NULL;
     int nb = 0;
     int save = 0;
+    char *str;
 
     for (int i = 0; shape[i]; i++) {
         tmp = word_tab(shape[i], " ");
@@ -66,7 +67,9 @@ int vrf_w(info_t *info, char **shape)
             my_free_tab(tmp);
             return (84);
         }
-        (nb = my_strlen(clean_str(shape[i], " "))) > save ? save = nb : 0;
+        str = clean_str(shape[i], " ");
+        (nb = my_strlen(str)) > save ? save = nb : 0;
+        free(str);
         my_free_tab(tmp);
     }
     if (save != info->width) {

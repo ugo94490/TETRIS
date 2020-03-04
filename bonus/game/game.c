@@ -69,4 +69,4 @@ void init_game(arg_t *arg)
     game_loop(&game);
     destroy_game(&game);
     sfMusic_destroy(music);
-}
+    sfRenderWindow_destroy(window.window);

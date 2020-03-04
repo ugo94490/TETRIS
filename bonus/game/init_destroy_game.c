@@ -81,6 +81,7 @@ void destroy_game(game_t *game)
     destroy_tetrimino(game->next_tetrimino);
     free_word_array(game->map);
     destroy_tetrimino_list(game->tetriminos);
-    sfRenderWindow_destroy(game->window->window);
     destroy_sprite(&(game->sprite));
+    destroy_text(&(game->text));
+    destroy_clock(&(game->timer));
 }
